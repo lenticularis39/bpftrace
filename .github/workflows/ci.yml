@@ -2,6 +2,15 @@ name: CI
 
 on: [push, pull_request]
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check mounts
+      run: cat /proc/mounts >&2
+    - name: Check cgroupfs
+      run: find /sys/fs/cgroup >&2
+    - name: Show cgroup
+      run: cat /proc/$$/cgroup >&2
   clang-format:
     # Only run clang-format on pull requests. We want to allow people to
     # ignore clang-format if they think it's not helpful.
